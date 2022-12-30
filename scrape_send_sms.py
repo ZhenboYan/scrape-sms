@@ -15,7 +15,7 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 phone_number = str(os.environ['PHONE_NUMBER'])
 twilio_number = str(os.environ['TWILIO_NUMBER'])
 http_website_url = str(os.environ['HTTP_WEBSITE_URL'])
-low_alert = int(os.environ['LOW_ALART'])
+low_alert = int(os.environ['LOW_ALART']) + 1
 scrape_rate = int(os.environ['SCRAPE_RATE'])
 message = str(os.environ['MESSAGE'])
 
@@ -38,7 +38,7 @@ while(1):
         if old_text != plain_text:
             for sentence in sentences:
                 if sentence.find(str(datetime.today().date())) != -1: # found today's day
-                    for i in range(low_alert+1):
+                    for i in range(low_alert):
                         find_sen = f"\"Food_Weight\":{i},\"Time\":\"{str(datetime.today().date())}"
                     if (sentence.find(find_sen) != -1 and sentence.find("Turn On") == -1):#don't send when just turn on
                         logic_acc = True
