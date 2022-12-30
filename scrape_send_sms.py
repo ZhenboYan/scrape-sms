@@ -18,8 +18,7 @@ http_website_url = str(os.environ['HTTP_WEBSITE_URL'])
 low_alert = int(os.environ['LOW_ALERT']) + 1
 scrape_rate = int(os.environ['SCRAPE_RATE'])
 message = str(os.environ['MESSAGE'])
-
-# message = "From Lemonade: ~Meow~ My food is running low... meow hunggie"
+my_number = str(os.environ['MY_NUMBER'])
 
 client = Client(account_sid, auth_token)
 prev_sen = ""
@@ -52,7 +51,13 @@ while(1):
                         from_=f'{twilio_number}',
                         to=f'+1{phone_number}'
                     )
-                    
+                sleep(1)
+                message = client.messages \
+                    .create(
+                        body=f'{message}',
+                        from_=f'{twilio_number}',
+                        to=f'+1{my_number}'
+                    )
                 print("weight below low alert")    
                 print(message.sid)
                 print("a message is sent!")
