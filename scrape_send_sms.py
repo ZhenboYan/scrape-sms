@@ -42,6 +42,7 @@ while(1):
                         find_sen = f"\"Food_Weight\":{i},\"Time\":\"{str(datetime.today().date())}"
                         if (sentence.find(find_sen) != -1 and sentence.find("Turn On") == -1):#don't send when just turn on
                             logic_acc = True
+                            message = message + f" food is less than {i} grams now."
                 
             if logic_acc:
                 message = client.messages \
