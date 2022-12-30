@@ -51,7 +51,7 @@ while(1):
                         from_=f'{twilio_number}',
                         to=f'+1{phone_number}'
                     )
-                message = client.messages \
+                message2 = client.messages \
                     .create(
                         body=f'{send_message}',
                         from_=f'{twilio_number}',
