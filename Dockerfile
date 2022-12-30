@@ -3,7 +3,7 @@ RUN yum install -y pip python3 wget
 RUN pip3 install twilio requests
 RUN wget -O /home/run.sh  https://raw.githubusercontent.com/ZhenboYan/scrape-sms/main/run.sh
 
-ENTRYPOINT ["./run.sh" ]
+ENTRYPOINT ["./home/run.sh" ]
 
 # FROM alpine:latest
 # RUN apk add --no-cache python3 py3-pip
