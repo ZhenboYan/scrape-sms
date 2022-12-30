@@ -16,7 +16,7 @@ phone_number = str(os.environ['PHONE_NUMBER'])
 twilio_number = str(os.environ['TWILIO_NUMBER'])
 http_website_url = str(os.environ['HTTP_WEBSITE_URL'])
 low_alert = str(os.environ['LOW_ALART'])
-scrape_rate = os.environ['SCRAPE_RATE']
+scrape_rate = int(os.environ['SCRAPE_RATE'])
 message = str(os.environ['MESSAGE'])
 
 message = "From Lemonade: ~Meow~ My food is running low... meow hunggie"
