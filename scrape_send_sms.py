@@ -19,10 +19,10 @@ low_alert = int(os.environ['LOW_ALERT']) + 1
 scrape_rate = int(os.environ['SCRAPE_RATE'])
 message = str(os.environ['MESSAGE'])
 
-message = "From Lemonade: ~Meow~ My food is running low... meow hunggie"
+# message = "From Lemonade: ~Meow~ My food is running low... meow hunggie"
 
 client = Client(account_sid, auth_token)
-old_text = ""
+prev_sen = ""
 logic_acc = False
 fed_state = True
 
@@ -35,14 +35,15 @@ while(1):
         plain_text = get_site.text
         sentences = plain_text.split("\"}")
         
-        if old_text != plain_text:
-            for sentence in sentences:
-                if sentence.find(str(datetime.today().date())) != -1: # found today's day
-                    for i in range(low_alert):
-                        find_sen = f"\"Food_Weight\":{i},\"Time\":\"{str(datetime.today().date())}"
-                        if (sentence.find(find_sen) != -1 and sentence.find("Turn On") == -1):#don't send when just turn on
-                            logic_acc = True
-                            message = message + f" food is less than {i} grams now."
+        sentence = sentences[-2]
+        find_weight = sentence.split(",{\"Food_Weight\":")[1].split(",\"")
+        weight = int(find_weight[0])
+        print(weight)
+        
+        if prev_sen != sentence:
+            if (weight <= low_alert and sentence.find("Turn On") == -1):#don't send when just turn on
+                logic_acc = True
+                message = message + f". food is less than {weight} grams now."
                 
             if logic_acc:
                 message = client.messages \
@@ -58,8 +59,8 @@ while(1):
                 fed_state = False
                 logic_acc = False
         
-        old_text = plain_text
-    
+        prev_sen = sentence
+
     else:
         print("hungry state")
         print(str(datetime.today().date()))
