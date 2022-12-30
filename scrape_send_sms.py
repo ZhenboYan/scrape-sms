@@ -17,7 +17,7 @@ twilio_number = str(os.environ['TWILIO_NUMBER'])
 http_website_url = str(os.environ['HTTP_WEBSITE_URL'])
 low_alert = int(os.environ['LOW_ALERT']) + 1
 scrape_rate = int(os.environ['SCRAPE_RATE'])
-message = str(os.environ['MESSAGE'])
+send_message = str(os.environ['MESSAGE'])
 my_number = str(os.environ['MY_NUMBER'])
 
 client = Client(account_sid, auth_token)
@@ -42,25 +42,25 @@ while(1):
         if prev_sen != sentence:
             if (weight <= low_alert and sentence.find("Turn On") == -1):#don't send when just turn on
                 logic_acc = True
-                message = message + f"Food is less than {weight}g now."
+                send_message = send_message + f"Food is less than {weight}g now."
                 
             if logic_acc:
                 message = client.messages \
                     .create(
-                        body=f'{message}',
+                        body=f'{send_message}',
                         from_=f'{twilio_number}',
                         to=f'+1{phone_number}'
                     )
-                sleep(5)
                 message = client.messages \
                     .create(
-                        body=f'{message}',
+                        body=f'{send_message}',
                         from_=f'{twilio_number}',
                         to=f'+1{my_number}'
                     )
+
                 print("weight below low alert")    
-                print(message.sid)
                 print("a message is sent!")
+                print(message.sid)
                 fed_state = False
                 logic_acc = False
         
