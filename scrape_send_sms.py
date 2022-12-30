@@ -15,7 +15,7 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 phone_number = str(os.environ['PHONE_NUMBER'])
 twilio_number = str(os.environ['TWILIO_NUMBER'])
 http_website_url = str(os.environ['HTTP_WEBSITE_URL'])
-low_alert = str(os.environ['LOW_ALART'])
+low_alert = int(os.environ['LOW_ALART'])
 scrape_rate = int(os.environ['SCRAPE_RATE'])
 message = str(os.environ['MESSAGE'])
 
