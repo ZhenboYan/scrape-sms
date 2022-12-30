@@ -43,7 +43,7 @@ while(1):
         if prev_sen != sentence:
             if (weight <= low_alert and sentence.find("Turn On") == -1):#don't send when just turn on
                 logic_acc = True
-                message = message + f". food is less than {weight} grams now."
+                message = message + f"Food is less than {weight}g now."
                 
             if logic_acc:
                 message = client.messages \
