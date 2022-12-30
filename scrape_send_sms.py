@@ -40,8 +40,8 @@ while(1):
                 if sentence.find(str(datetime.today().date())) != -1: # found today's day
                     for i in range(low_alert):
                         find_sen = f"\"Food_Weight\":{i},\"Time\":\"{str(datetime.today().date())}"
-                    if (sentence.find(find_sen) != -1 and sentence.find("Turn On") == -1):#don't send when just turn on
-                        logic_acc = True
+                        if (sentence.find(find_sen) != -1 and sentence.find("Turn On") == -1):#don't send when just turn on
+                            logic_acc = True
                 
             if logic_acc:
                 message = client.messages \
